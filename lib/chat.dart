@@ -21,7 +21,7 @@ class _ChatState extends State<Chat> {
       messagelist.add({"role": "user", "text": usermessage});
     });
     final Url = Uri.parse(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyD8cv4ua4yvOZPhDPMCW3AZyZrjt62s6fs",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyCAFD-L1zyMohFLJeFy0RD-QOEHXMUSs2Y",
     );
     final headers = {"Content-Type": "application/json"};
     final body = jsonEncode({
@@ -66,11 +66,14 @@ class _ChatState extends State<Chat> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
+      appBar: AppBar(  actions: [
+          SizedBox(width: 10),
+          Icon(Icons.more_vert_outlined, color: Colors.black),
+          SizedBox(width: 10),],
+        backgroundColor: Colors.transparent,
         title: Center(
           child: Text(
-            "AI CHAT BOT",
+            "What Can I Help With?",
             style: TextStyle(
               color: Colors.black,
               fontSize: 25,
@@ -101,11 +104,14 @@ class _ChatState extends State<Chat> {
                       Expanded(
                         child: TextField(
                           controller: messagecontroller,
-                          decoration: InputDecoration(
-                            prefixIcon: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Icons.add),
-                            ),
+                          decoration: InputDecoration(suffixIcon: IconButton(
+                        onPressed:  () {
+                                sendmessage(messagecontroller.text.trim());
+                              }
+                            ,
+                        icon: Icon(Icons.keyboard_voice),
+                      ), 
+                           
                             hintText: "Ask Anything",
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -121,13 +127,16 @@ class _ChatState extends State<Chat> {
                           ),
                         ),
                       ),
-                      IconButton(
+                     
+                       IconButton(
                         onPressed:  () {
                                 sendmessage(messagecontroller.text.trim());
                               }
                             ,
                         icon: Icon(Icons.send),
                       ),
+
+
                     ],
                   ),
                 ),
